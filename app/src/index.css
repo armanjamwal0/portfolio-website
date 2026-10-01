@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cream: #f5f0e1;
+  --beige: #e8dcc4;
+  --coral: #f4a261;
+  --gold: #e9c46a;
+  --mint: #a8dadc;
+  --teal: #264653;
+  --ink: #161616;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Space Grotesk', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.font-display {
+  font-family: 'Space Grotesk', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+.font-mono2 {
+  font-family: 'Space Mono', ui-monospace, monospace;
+}
+
+::selection {
+  background: var(--coral);
+  color: #ffffff;
+}
+
+/* ---- marquee ---- */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 36s linear infinite;
+  will-change: transform;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ---- drifting dots in hero ---- */
+@keyframes drift {
+  0%, 100% { transform: translateY(0) }
+  50% { transform: translateY(-14px) }
+}
+
+/* ---- wavy divider slow slide ---- */
+@keyframes wave-slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-25%); }
+}
+.wave-slide {
+  animation: wave-slide 14s linear infinite;
+}
+
+/* ---- blinking cursor for mono terminal lines ---- */
+@keyframes caret {
+  0%, 45% { opacity: 1; }
+  50%, 95% { opacity: 0; }
+}
+.caret::after {
+  content: '▌';
+  animation: caret 1.1s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track, .wave-slide { animation: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* touch targets on mobile bottom nav */
+@supports (padding: max(0px)) {
+  .safe-bottom { padding-bottom: max(0.75rem, env(safe-area-inset-bottom)); }
+}
